@@ -3,10 +3,10 @@ public:
     
     bool isSafe(vector<vector<char>>&board , int row, int col, char digit){
         int n = board.size();
-        for(int k = 0 ; k < n ; k++ )
+        for(int k = 0 ; k < n ; k++ ){
             if(board[row][k] == digit) return false;
-        for(int k = 0 ; k < n ; k++)
             if(board[k][col] == digit) return false;
+        }
 
         int newRow  = (row/3)*3;
         int newCol = (col/3)*3;
