@@ -13,8 +13,8 @@ public:
         return mapping;
         
     }
-void createAns(string digits , vector<string> &ans ,string output ,int i){
-        unordered_map<char , string > mapping = createMapping(digits);
+void createAns(string digits , vector<string> &ans ,string output ,int i , unordered_map<char , string > &mapping ){
+       
 
         if(i >= digits.length() ){
             ans.push_back(output);
@@ -25,7 +25,7 @@ void createAns(string digits , vector<string> &ans ,string output ,int i){
           for(auto c : tempString){
               //iterate over each character , and include and exclude
               output.push_back(c);
-              createAns(digits , ans , output , i+1);
+              createAns(digits , ans , output , i+1 , mapping);
               output.pop_back();
           }
     
@@ -35,7 +35,8 @@ void createAns(string digits , vector<string> &ans ,string output ,int i){
         vector<string> ans;
         if(!digits.empty()) {
             string output = "";
-            createAns( digits, ans , output , 0);
+            unordered_map<char , string > mapping = createMapping(digits);
+            createAns( digits, ans , output , 0 , mapping);
        }
 
         
