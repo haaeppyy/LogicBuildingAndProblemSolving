@@ -1,17 +1,22 @@
 class Solution {
 public:
-    void genrate(vector<string>&ans,int& n , int open , int close , string output){
-        if(open + close == (2*n)){
-            ans.push_back(output);
-            return;
+    vector<string> genrate(int& n , int open , int close , string output){
+        if(open + close == (2*n))    return {output};
+
+        vector<string> result;
+        
+        if(open < n) {
+            vector<string>v1 = genrate(n , open + 1 , close , output +'(');
+            result.insert(result.end(), v1.begin() , v1.end());
         }
-        if(open < n) genrate(ans,n , open + 1 , close , output +'(');
-        if(close < open) genrate(ans,n , open , close + 1 , output + ')');
+        if(close < open){
+            vector<string>v2 = genrate(n , open , close + 1 , output + ')');
+            result.insert(result.end(), v2.begin() , v2.end());
+        }
+        return result;
 
     }
     vector<string> generateParenthesis(int n) {
-        vector<string> ans;
-        genrate(ans, n , 0 , 0 , "");
-        return ans;
+        return genrate( n , 0 , 0 , "");;
     }
 };
