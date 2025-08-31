@@ -1,9 +1,10 @@
 class Solution {
 public:
-    void solveBackTrack(int n, int k,int i ,vector<vector<int>>&res , vector<int>temp){
+    void solveBackTrack(int n, int k,int i ,vector<vector<int>>&res , vector<int>&temp){
         if(temp.size() == k)
         {
             res.push_back(temp);
+            return;
         }
         for(int j = i+1 ; j <= n ; j++){
             temp.push_back(j);
