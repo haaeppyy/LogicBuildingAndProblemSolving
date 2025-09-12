@@ -12,7 +12,7 @@ public:
        }
        ans.push_back(tempVector);
    }
-    bool isSafe(vector<vector<char>> &board, int i , int j) {
+    bool isSafe( int i , int j) {
 
         
         if (rowMap[i])
@@ -33,7 +33,7 @@ public:
             
 
         for (int j = 0; j < n; j++) {
-            if (isSafe(board , i , j)){
+            if (isSafe( i , j)){
                 board[i][j] = 'Q';
                 rowMap[i] = true;
                 upperDaigonalMap[i - j] = true;
