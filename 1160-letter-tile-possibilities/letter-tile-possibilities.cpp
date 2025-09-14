@@ -1,23 +1,22 @@
 class Solution {
 public:
-    unordered_map<char , int>mapping;
-    int backTrack(string tiles){
-        int result = 0;
-
-       for(auto &p : mapping){
-            char c = p.first;
-            if(mapping[c] > 0){
-                mapping[c]--;
-                result += 1 + backTrack(tiles);
-                mapping[c]++;
-            }
-       }
-       return result;
-    }
-    int numTilePossibilities(string tiles) {
-        for(char tile : tiles){
-            mapping[tile]++;
+    unordered_set<string> seen;
+    
+    void backtrack(string &tiles, vector<bool> &used, string current) {
+        if (!current.empty()) {
+            seen.insert(current);
         }
-        return backTrack(tiles);
+        for (int i = 0; i < tiles.size(); i++) {
+            if (used[i]) continue;
+            used[i] = true;
+            backtrack(tiles, used, current + tiles[i]);
+            used[i] = false;
+        }
+    }
+    
+    int numTilePossibilities(string tiles) {
+        vector<bool> used(tiles.size(), false);
+        backtrack(tiles, used, "");
+        return seen.size();
     }
 };
